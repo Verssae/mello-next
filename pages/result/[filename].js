@@ -2,7 +2,7 @@ import Head from "next/head"
 import Layout, { siteTitle } from "../../components/layout"
 import { AudioPlayerProvider, useAudioPlayer } from "react-use-audio-player"
 import { getAudio } from "../../lib/mellotron"
-import { GetStaticProps } from "next"
+import {useRouter} from "next/router"
 
 const AudioPlayer = ({ file }) => {
     const { togglePlayPause, ready, loading, playing } = useAudioPlayer({
@@ -21,15 +21,15 @@ const AudioPlayer = ({ file }) => {
     )
 }
 
-export default function Result({ filename, ok }: { filename: string, ok: boolean }) {
-    console.log(filename)
-    console.log(ok)
+export default function Result({ filename, ok }) {
+    const router = useRouter()
     return (
         <AudioPlayerProvider>
             <Layout>
                 <Head>
                     <title>{siteTitle}</title>
                 </Head>
+                <button onClick={()=>router.back()}>뒤로 가기</button>
                 <section>
                     <h1>변환된 음성 듣기</h1>
     {ok ? <AudioPlayer file={`../../downloads/${filename}`} /> : "Loading"}
@@ -49,7 +49,7 @@ export async function getStaticPaths() {
     }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }) => {
     console.log("getstaticprops:")
     const { filename } = params
     console.log(filename)

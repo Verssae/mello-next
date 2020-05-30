@@ -3,7 +3,7 @@ import styles from './layout.module.css'
 
 export const siteTitle = 'Mellotron STS website'
 
-export default function Layout({children}: {children : React.ReactNode}) 
+export default function Layout({children}) 
 {
     return (
         <div className={styles.container}>

@@ -1,38 +1,43 @@
 import Head from "next/head"
-import { GetStaticProps } from "next"
 import Layout, { siteTitle } from "../components/layout"
-import { getAudio } from "../lib/mellotron"
-import { FormEvent } from "react"
-import Link from "next/link"
-import {useRouter} from "next/router"
-import { useState, useRef } from "react"
+import { useRouter } from "next/router"
+import { useState, useRef, useEffect } from "react"
+import Recorder from "../components/recorder"
 
 export default function Home() {
-  const [result, setResult] = useState("nothing")
+  const [loading, setLoading] = useState("")
   const fileRef = useRef()
   const textRef = useRef()
   const speakerRef = useRef()
+  const audioRef = useRef()
   const router = useRouter()
-  const onSubmit = async (e: FormEvent) => {
+
+  const onSubmit = async (e) => {
     e.preventDefault()
+    setLoading("Loading...")
     let data = new FormData()
     if (fileRef.current && textRef.current && speakerRef.current) {
       data.append('file', fileRef.current.files[0])
       data.append('text', textRef.current.value)
       data.append('speaker', speakerRef.current.value)
-      await fetch("http://27.96.130.116:16006/uploads", {
+      await fetch("https://27.96.130.116:16006/uploads", {
         method: 'POST',
         body: data
-      }).then(response => response.json()).then(({result}) => router.push(`/result/${result}`))
-      setResult("done")
+      }).then(response => response.json())
+      .then(({ result }) => router.push(`/result/${result}`))
+      .then(e=>setLoading("Page Loading...!"))
+      .catch(e=>setLoading("Fetch Error"))
     } else {
-      setResult("다시 폼을 작성")
+      setLoading("다시 폼을 작성")
     }
   }
 
-  const handleDownloadClick = (e: FormEvent) => {
-    e.preventDefault()
-    router.push("/result/1.wav")
+  const onChangeHandler = (e) => {
+    const file = fileRef.current.files[0]
+    const { current } = audioRef
+    if (current != undefined) {
+      current.src = URL.createObjectURL(file)
+    }
   }
 
   return (
@@ -46,10 +51,14 @@ export default function Home() {
           <p>변환할 음성을 선택하세요 : </p>
           <input
             ref={fileRef}
+            onChange={onChangeHandler}
             type='file'
+            accept="audio/*"
+            capture="microphone"
             name='file'
           />
-
+          
+          <audio ref={audioRef} controls></audio>
           <p>음성의 내용을 입력하세요 : </p>
           <input
             ref={textRef}
@@ -65,10 +74,9 @@ export default function Home() {
           <button onClick={onSubmit} type="submit">제출</button>
         </form>
       </section>
-      <hr />
-      <button onClick={handleDownloadClick}>Download</button>
+
       <section>
-        <p>{result}</p>
+        <p>{loading}</p>
       </section>
     </Layout>
   )
