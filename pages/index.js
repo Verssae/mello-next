@@ -2,7 +2,6 @@ import Head from "next/head"
 import Layout, { siteTitle } from "../components/layout"
 import { useRouter } from "next/router"
 import { useState, useRef, useEffect } from "react"
-import Recorder from "../components/recorder"
 
 export default function Home() {
   const [loading, setLoading] = useState("")
