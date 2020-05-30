@@ -2,7 +2,7 @@ import fs from 'fs'
 
 const downloadFile = (async (filename: string) => {
     const url = `http://27.96.130.116:16006/downloads/${filename}`
-    const path = `downloads/${filename}`
+    const path = `public/downloads/${filename}`
     const res = await fetch(url)
     if (res.ok) {
         const fileStream = fs.createWriteStream(path);
@@ -14,9 +14,9 @@ const downloadFile = (async (filename: string) => {
             fileStream.on("finish", function() {
               resolve(filename)
             })
-          }).then(x=>({data: x , ok: true})).catch(x=>({data: x, ok:false}))
+          }).then(x=>({filename: x , ok: true})).catch(x=>({filename: x, ok:false}))
     } else {
-        return ({data: "error", ok:false})
+        return ({filename: "error", ok:false})
     }
   })
 

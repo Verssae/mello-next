@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 8080",
     "build": "next build",
     "start": "next start"
   },
@@ -13,7 +13,8 @@
     "node-fetch": "^2.6.0",
     "react": "16.13.1",
     "react-audio-player": "^0.13.0",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-use-audio-player": "^0.0.17"
   },
   "devDependencies": {
     "@types/node": "^14.0.1",
