@@ -16,7 +16,7 @@ export default function Layout({ children }) {
               className={`${styles.brandLogo}`}
               alt="Product Logo"
             />
-            <span className={styles.brandName}>VerssaeSTS</span>
+            <span className={styles.brandName}>Voice Imitator</span>
           </div>
         </Link>
         <ul className={styles.navitem}>

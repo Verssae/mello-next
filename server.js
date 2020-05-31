@@ -10,8 +10,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const server = express();  
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+
 
 const options = { 
   key: fs.readFileSync('localhost.key'),

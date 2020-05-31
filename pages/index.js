@@ -6,7 +6,6 @@ import { useState, useRef, useEffect } from "react"
 export default function Home() {
   const [loading, setLoading] = useState("")
   const fileRef = useRef()
-  const textRef = useRef()
   const speakerRef = useRef()
   const audioRef = useRef()
   const router = useRouter()
@@ -15,12 +14,11 @@ export default function Home() {
     e.preventDefault()
     setLoading("Loading...")
     let data = new FormData()
-    if (fileRef.current && textRef.current && speakerRef.current) {
+    if (fileRef.current && speakerRef.current) {
       data.append('file', fileRef.current.files[0])
-      data.append('text', textRef.current.value)
       data.append('speaker', speakerRef.current.value)
       console.log(data.get("file"))
-      await fetch("https://27.96.130.116:16006/uploads", {
+      await fetch("http://27.96.130.116:16006/uploads", {
         method: 'POST',
         body: data
       }).then(response => response.json())
@@ -33,9 +31,10 @@ export default function Home() {
   }
 
   const onChangeHandler = (e) => {
+    e.preventDefault()
     const file = fileRef.current.files[0]
     const { current } = audioRef
-    if (current != undefined) {
+    if (current && file) {
       current.src = URL.createObjectURL(file)
     }
   }
@@ -59,12 +58,7 @@ export default function Home() {
           />
           
           <audio ref={audioRef} controls></audio>
-          <p>음성의 내용을 입력하세요 : </p>
-          <input
-            ref={textRef}
-            type="text"
-            name="text"
-          />
+         
           <p>원하는 목소리를 선택하세요 : </p>
           <select ref={speakerRef}>
             <option defaultValue="kss">KSS</option>
