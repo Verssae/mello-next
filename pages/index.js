@@ -2,7 +2,6 @@ import Head from "next/head"
 import Layout, { siteTitle } from "../components/layout"
 import { useRouter } from "next/router"
 import { useState, useRef, useEffect } from "react"
-import Recorder from "../components/recorder"
 
 export default function Home() {
   const [loading, setLoading] = useState("")
@@ -20,6 +19,7 @@ export default function Home() {
       data.append('file', fileRef.current.files[0])
       data.append('text', textRef.current.value)
       data.append('speaker', speakerRef.current.value)
+      console.log(data.get("file"))
       await fetch("https://27.96.130.116:16006/uploads", {
         method: 'POST',
         body: data
