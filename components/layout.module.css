@@ -1,5 +1,61 @@
+@font-face {
+  font-family: 'Pacifico';
+  src: url('/fonts/Pacifico-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('/fonts/NanumGothic-Regular.ttf');
+}
+
 .container {
-    max-width: 36rem;
-    padding: 0 1rem;
-    margin: 3rem auto 6rem;
+  max-width: 36rem;
+  padding: 0 1rem;
+}
+
+.navbar {
+  display: flex;
+  padding: 1em 1.5em 1.3em;
+  align-items: center;
+  border-bottom: lightgray 1px solid;
+}
+
+.brand {
+  display: flex;
+}
+
+.brandName {
+  font-size: 13pt;
+  font-weight: bold;
+  padding-left: 0.5em;
+  font-family: 'Pacifico';
+}
+
+.brandLogo {
+  width: 1.6em;
+  height: 1.6em;
+}
+
+.navitem {
+  list-style: none;
+  padding: 0 0 0 1em;
+  margin: 0;
+}
+
+.navitem > li {
+  float: left;
+  padding: 0 0 0 1.5em;
+  margin: 0;
+  font-size: 12pt;
+  font-family: 'NanumGothic';
+}
+
+.github {
+  width: 1.4em;
+  height: 1.4em;
+  margin: 0 1em 0 auto;
+}
+
+.github:hover {
+  opacity: 0.5;
 }
