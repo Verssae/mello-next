@@ -5,31 +5,52 @@ import { useState, useRef, useEffect } from "react"
 import utilStyles from '../styles/utils.module.css'
 
 export default function Home() {
-  const [loading, setLoading] = useState("")
+  const [loading, setLoading] = useState("NO FILE")
+  const [file, setFile] = useState(null)
+  const [result, setResult] = useState("")
   const fileRef = useRef()
-  const speakerRef = useRef()
   const audioRef = useRef()
-  const router = useRouter()
   const [speaker, setSpeaker] = useState(0)
 
-  const onSubmit = async (e) => {
-    e.preventDefault()
-    setLoading("Loading...")
+  const fetching = () => {
+    
     let data = new FormData()
-    if (fileRef.current && speakerRef.current) {
-      data.append('file', fileRef.current.files[0])
-      data.append('speaker', speakerRef.current.value)
-      console.log(data.get("file"))
-      await fetch("http://27.96.130.116:16006/uploads", {
+    if (file != null) {
+      data.append('file', file)
+      data.append('speaker', speaker)
+      setLoading("UPLOADING FILE")
+      fetch("http://27.96.130.116:16006/uploads", {
         method: 'POST',
         body: data
       }).then(response => response.json())
-      .then(({ result }) => router.push(`/result/${result}`))
-      .then(e=>setLoading("Page Loading...!"))
-      .catch(e=>setLoading("Fetch Error"))
+      .then(({ result }) => {
+        setLoading("DOWNLOADING FILE")
+        fetch(`/api/upload?filename=${result}`)
+        .then(response => response.json())
+        .then(({filename})=> {
+          setLoading("DOWNLOAD COMPLETE")
+          setResult(filename)
+        })
+        .catch(e=>setLoading("DOWNLOAD ERROR"))
+      })
+      .catch(e=>setLoading("UPLOADING ERROR"))
     } else {
-      setLoading("다시 폼을 작성")
+      setLoading("NO FILE")
     }
+  }
+
+  const tempFetching = () => {
+    if (file != null) {
+      setLoading("UPLOADING FILE")
+      setTimeout(() => {
+        setLoading("DOWNLOADING FILE")
+        setTimeout(() => {
+          setLoading("DOWNLOAD COMPLETE")
+          setResult("temp.wav")
+        },3000)
+      },3000)
+    }
+    
   }
 
   const onChangeHandler = (e) => {
@@ -42,8 +63,15 @@ export default function Home() {
   }
 
   const fileHandler = (file) => {
-    console.log(file)
+    setFile(file)
   }
+
+  useEffect(()=>{
+    console.log(file)
+    console.log(speaker)
+    // fetching()
+    tempFetching()
+  },[file, speaker])
 
   const siteTitle = "Mellotron STS website"
 
@@ -64,34 +92,12 @@ export default function Home() {
         </div>
       </section>
       <section>
-        <Dropzone callback={fileHandler}></Dropzone>
+        <Dropzone callback={fileHandler} file={file} loading={loading} result={result}></Dropzone>
       </section>
       <section>
         <hr />
       </section>
-      <section className={utilStyles.notDisplay}>
-        <form onSubmit={onSubmit} encType="multipart/form-data">
-          <p>변환할 음성을 선택하세요 : </p>
-          <input
-            ref={fileRef}
-            onChange={onChangeHandler}
-            type='file'
-            accept="audio/*"
-            capture="microphone"
-            name='file'
-          />
-          
-          <audio ref={audioRef} controls></audio>
-         
-          <p>원하는 목소리를 선택하세요 : </p>
-          <select ref={speakerRef}>
-            <option defaultValue="kss">KSS</option>
-            <option value="you">유희열</option>
-          </select>
-          <hr />
-          <button onClick={onSubmit} type="submit">제출</button>
-        </form>
-      </section>
+     
 
       <section>
         <p>{loading}</p>

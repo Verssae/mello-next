@@ -1,4 +1,3 @@
-import Head from "next/head"
 import Layout from "../../components/layout"
 import { getAudio } from "../../lib/mellotron"
 import { useRouter } from "next/router"

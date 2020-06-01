@@ -2,17 +2,25 @@ import styles from "./dropzone.module.css"
 import React, {useCallback, useState, useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
 
-export default function Dropzone({callback}) {
-
-  const [file, setFile] = useState(null)
+export default function Dropzone({callback, file, loading, result}) {
 
   const onDrop = useCallback(acceptedFiles => {
-    setFile(acceptedFiles)
+    callback(acceptedFiles[0])
   }, [])
 
-  useEffect(()=> {
-    callback(file)
-  }, [file])
+  const compByLoading = (loading) => {
+    console.log(loading)
+    switch (loading) {
+      case "NO FILE" :
+        return <p>파일을 여기로 끌어 놓으세요</p>
+      case "UPLOADING FILE" :
+        return <div><p>{file ? file.path : ""}</p><p>UPLOADING FILE</p></div>
+      case "DOWNLOADING FILE" : 
+        return <div><p>{file ? file.path : ""}</p><p>DOWNLOADING FILE</p></div>
+      case "DOWNLOAD COMPLETE" : 
+        return <audio src={result} controls/>
+    }
+  }
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
@@ -25,7 +33,8 @@ export default function Dropzone({callback}) {
       }>
         <input {...getInputProps()} />
         <img src="/images/wav.svg" alt="wav" width="60px" />
-        <p>{file !=null ? file[0].path : "파일을 여기로 끌어 놓으세요"}</p>
+        
+        {compByLoading(loading)}
       </div>
     </div>
   )
