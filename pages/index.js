@@ -2,6 +2,7 @@ import Layout from "../components/layout"
 import Dropzone from "../components/dropzone"
 import { useRouter } from "next/router"
 import { useState, useRef, useEffect } from "react"
+import utilStyles from '../styles/utils.module.css'
 
 export default function Home() {
   const [loading, setLoading] = useState("")
@@ -51,6 +52,9 @@ export default function Home() {
         <Dropzone></Dropzone>
       </section>
       <section>
+        <hr />
+      </section>
+      <section className={utilStyles.notDisplay}>
         <form onSubmit={onSubmit} encType="multipart/form-data">
           <p>변환할 음성을 선택하세요 : </p>
           <input
