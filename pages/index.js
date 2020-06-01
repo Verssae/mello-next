@@ -1,4 +1,5 @@
 import Layout from "../components/layout"
+import Dropzone from "../components/dropzone"
 import { useRouter } from "next/router"
 import { useState, useRef, useEffect } from "react"
 
@@ -43,7 +44,13 @@ export default function Home() {
   return (
     <Layout siteTitle={siteTitle}>
       <section>
-        <h1>Style Transfer</h1>
+        <img src="/images/audio.svg" alt="audio Logo" width="100px" />
+        <p>화자의 스타일을 입히기</p>
+      </section>
+      <section>
+        <Dropzone></Dropzone>
+      </section>
+      <section>
         <form onSubmit={onSubmit} encType="multipart/form-data">
           <p>변환할 음성을 선택하세요 : </p>
           <input
