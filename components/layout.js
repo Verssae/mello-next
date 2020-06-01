@@ -37,7 +37,9 @@ export default function Layout({ children, siteTitle }) {
           <meta name="description" content="Mellotron STS Website using Next.js" />
           <title>{siteTitle}</title>
         </Head>
-        <main>{children}</main>
+        <div className={styles.main}>
+          {children}
+        </div>
       </div>
     </>
   )

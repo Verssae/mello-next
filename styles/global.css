@@ -1,9 +1,18 @@
+@font-face {
+  font-family: 'Pacifico';
+  src: url('/fonts/Pacifico-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('/fonts/NanumGothic-Regular.ttf');
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: NanumGothic;
   line-height: 1.6;
   font-size: 18px;
 }
