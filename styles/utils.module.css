@@ -50,3 +50,38 @@
 .lightText {
   color: #999;
 }
+
+.notDisplay {
+  display: none;
+}
+
+.inline {
+  display: inline;
+}
+
+.active {
+  border: 2px red solid;
+  border-radius: 5px;
+}
+
+.nonactive {
+  border: 2px white solid;
+  border-radius: 5px;
+}
+
+.card {
+  display: inline-block;
+  padding: 9px 20px;
+  margin: 0 1px;
+  box-sizing: border-box;
+}
+
+.card:hover {
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+.card p {
+  font-size: 12pt;
+  padding: 0;
+}
