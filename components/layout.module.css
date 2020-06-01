@@ -41,7 +41,7 @@
   padding: 0 0 0 1.5em;
   margin: 0;
   font-size: 12pt;
-  font-family: 'NanumGothic';
+  font-family: 'NotoSansThin';
 }
 
 .github {
@@ -55,8 +55,11 @@
 }
 
 .main {
-  background-color: green;
   margin: 0 auto;
   padding: 0;
   text-align: center;
+}
+
+.main img {
+  display: inline;
 }

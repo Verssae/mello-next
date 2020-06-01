@@ -1,0 +1,17 @@
+.container {
+  background-color: #FF1C00;
+  padding: 12px;
+  margin: 80px;
+}
+
+.zone {
+  background-color: #D41F17;
+  border: #AA342D 3px dashed;
+  padding: 75px;
+}
+
+.zone p {
+  color: white;
+  font-size: 12pt;
+  font-family: 'NotoSansRegular';
+}
