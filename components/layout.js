@@ -3,9 +3,7 @@ import Link from 'next/link'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 
-export const siteTitle = 'Mellotron STS website'
-
-export default function Layout({ children }) {
+export default function Layout({ children, siteTitle }) {
   return (
     <>
       <navbar className={styles.navbar}>
@@ -37,6 +35,7 @@ export default function Layout({ children }) {
       <div className={styles.container}>
         <Head>
           <meta name="description" content="Mellotron STS Website using Next.js" />
+          <title>{siteTitle}</title>
         </Head>
         <main>{children}</main>
       </div>
