@@ -39,6 +39,10 @@ export default function Home() {
     }
   }
 
+  const fileHandler = (file) => {
+    console.log(file)
+  }
+
   const siteTitle = "Mellotron STS website"
 
   return (
@@ -48,7 +52,7 @@ export default function Home() {
         <p>화자의 스타일을 입히기</p>
       </section>
       <section>
-        <Dropzone></Dropzone>
+        <Dropzone callback={fileHandler}></Dropzone>
       </section>
       <section>
         <form onSubmit={onSubmit} encType="multipart/form-data">
