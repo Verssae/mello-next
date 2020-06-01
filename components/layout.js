@@ -8,7 +8,7 @@ export const siteTitle = 'Mellotron STS website'
 export default function Layout({ children }) {
   return (
     <>
-      <navbar className={styles.navbar}>
+      <nav className={styles.navbar}>
         <Link href="/">
           <div className={styles.brand}>
             <img
@@ -33,7 +33,7 @@ export default function Layout({ children }) {
             alt="Github"
           />
         </a>
-      </navbar>
+      </nav>
       <div className={styles.container}>
         <Head>
           <meta name="description" content="Mellotron STS Website using Next.js" />

@@ -20,10 +20,15 @@
   border-bottom: lightgray 1px solid;
 }
 
+
 .brand {
   display: flex;
 }
 
+.brand:hover {
+  cursor : pointer;
+  opacity: 0.5;
+}
 .brandName {
   font-size: 13pt;
   font-weight: bold;
