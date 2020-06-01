@@ -1,16 +1,5 @@
-@font-face {
-  font-family: 'Pacifico';
-  src: url('/fonts/Pacifico-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'NanumGothic';
-  src: url('/fonts/NanumGothic-Regular.ttf');
-}
-
 .container {
-  max-width: 36rem;
-  padding: 0 1rem;
+  padding: 0;
 }
 
 .navbar {
@@ -63,4 +52,11 @@
 
 .github:hover {
   opacity: 0.5;
+}
+
+.main {
+  background-color: green;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
 }

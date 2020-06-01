@@ -1,5 +1,4 @@
-import Head from "next/head"
-import Layout, { siteTitle } from "../components/layout"
+import Layout from "../components/layout"
 import { useRouter } from "next/router"
 import { useState, useRef, useEffect } from "react"
 
@@ -39,13 +38,12 @@ export default function Home() {
     }
   }
 
+  const siteTitle = "Mellotron STS website"
+
   return (
-    <Layout>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
+    <Layout siteTitle={siteTitle}>
       <section>
-        <h1>음성 제출</h1>
+        <h1>Style Transfer</h1>
         <form onSubmit={onSubmit} encType="multipart/form-data">
           <p>변환할 음성을 선택하세요 : </p>
           <input
