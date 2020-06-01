@@ -1,5 +1,5 @@
 import Head from "next/head"
-import Layout, { siteTitle } from "../../components/layout"
+import Layout from "../../components/layout"
 import { getAudio } from "../../lib/mellotron"
 import { useRouter } from "next/router"
 
@@ -7,10 +7,8 @@ import { useRouter } from "next/router"
 export default function Result({ filename, ok }) {
     const router = useRouter()
     return (
-        <Layout>
-            <Head>
-                <title>{siteTitle}</title>
-            </Head>
+        <Layout siteTitle={"asdfasdf"}>
+          
             <button onClick={() => router.back()}>뒤로 가기</button>
             <section>
                 <h1>변환된 음성 듣기</h1>
