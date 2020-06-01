@@ -1,12 +1,18 @@
 import styles from "./dropzone.module.css"
-import React, {useCallback} from 'react'
+import React, {useCallback, useState, useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
 
-export default function Dropzone() {
+export default function Dropzone({callback}) {
+
+  const [file, setFile] = useState(null)
 
   const onDrop = useCallback(acceptedFiles => {
-    console.log(acceptedFiles)
+    setFile(acceptedFiles)
   }, [])
+
+  useEffect(()=> {
+    callback(file)
+  }, [file])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 

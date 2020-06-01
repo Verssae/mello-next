@@ -6,7 +6,7 @@ import utilStyles from '../styles/utils.module.css'
 export default function Layout({ children, siteTitle }) {
   return (
     <>
-      <navbar className={styles.navbar}>
+      <nav className={styles.navbar}>
         <Link href="/">
           <div className={styles.brand}>
             <img
@@ -31,7 +31,7 @@ export default function Layout({ children, siteTitle }) {
             alt="Github"
           />
         </a>
-      </navbar>
+      </nav>
       <div className={styles.container}>
         <Head>
           <meta name="description" content="Mellotron STS Website using Next.js" />
