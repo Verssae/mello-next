@@ -10,6 +10,7 @@ export default function Home() {
   const speakerRef = useRef()
   const audioRef = useRef()
   const router = useRouter()
+  const [speaker, setSpeaker] = useState(0)
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -51,6 +52,16 @@ export default function Home() {
       <section>
         <img src="/images/audio.svg" alt="audio Logo" width="100px" />
         <p>화자의 스타일을 입히기</p>
+      </section>
+      <section>
+        <div className={`${utilStyles.card} ${speaker == 0 ? utilStyles.active : utilStyles.nonactive}`} onClick={()=>setSpeaker(0)}>
+          <img src="/images/kss.svg" alt="audio Logo" width="50px" />
+          <p>김양주</p>
+        </div>
+        <div className={`${utilStyles.card} ${speaker == 1 ? utilStyles.active : utilStyles.nonactive}`} onClick={()=>setSpeaker(1)}>
+          <img src="/images/yu.svg" alt="audio Logo" width="50px" />
+          <p>유희영</p>
+        </div>
       </section>
       <section>
         <Dropzone callback={fileHandler}></Dropzone>

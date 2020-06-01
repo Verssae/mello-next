@@ -18,10 +18,14 @@ export default function Dropzone({callback}) {
 
   return (
     <div className={styles.container}>
-      <div {...getRootProps()} className={styles.zone}>
+      <div {...getRootProps()} className={
+        isDragActive ?
+        styles.active :
+        styles.zone
+      }>
         <input {...getInputProps()} />
         <img src="/images/wav.svg" alt="wav" width="60px" />
-        <p>파일을 여기로 끌어 놓으세요</p>
+        <p>{file !=null ? file[0].path : "파일을 여기로 끌어 놓으세요"}</p>
       </div>
     </div>
   )
