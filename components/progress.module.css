@@ -1,0 +1,9 @@
+.content {
+  border: darkgrey 1px solid;
+  height: 100%;
+}
+
+.name {
+  font-size: 17pt;
+  font-family: 'NotoSansThin';
+}
