@@ -30,12 +30,6 @@
   height: 300px;
 }
 
-.container p {
-  color: white;
-  font-size: 12pt;
-  font-family: 'NotoSansRegular';
-}
-
 .container > div {
   padding: 75px 0;
 }

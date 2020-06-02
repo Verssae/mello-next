@@ -1,6 +1,7 @@
 import Layout from "../components/layout"
 import Dropzone from "../components/dropzone"
 import Player from "../components/player"
+import Progress from "../components/progress"
 
 import { useRouter } from "next/router"
 import { useState, useRef, useEffect } from "react"
@@ -57,13 +58,13 @@ export default function Home() {
   }
 
   const compByLoading = (loading) => {
+    console.log(file)
     switch (loading) {
       case "NO FILE" :
         return <Dropzone callback={fileHandler} />
       case "UPLOADING FILE" :
-        return <div><p>{file ? file.path : ""}</p><p>UPLOADING FILE</p></div>
       case "DOWNLOADING FILE" : 
-        return <div><p>{file ? file.path : ""}</p><p>DOWNLOADING FILE</p></div>
+        return <Progress filename={file.name}/>
       case "DOWNLOAD COMPLETE" : 
         return <Player path={result} trackTitle={text} />
     }

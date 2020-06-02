@@ -9,6 +9,12 @@
   border: #AA342D 4px dashed;
 }
 
+.zone p {
+  color: white;
+  font-size: 12pt;
+  font-family: 'NotoSansRegular';
+}
+
 .zoneActive,
 .zone:hover {
   filter: brightness(85%);
