@@ -1,5 +1,7 @@
 import Layout from "../components/layout"
 import Dropzone from "../components/dropzone"
+import Player from "../components/player"
+
 import { useRouter } from "next/router"
 import { useState, useRef, useEffect } from "react"
 import utilStyles from '../styles/utils.module.css'
@@ -50,7 +52,20 @@ export default function Home() {
         },3000)
       },3000)
     }
-    
+  }
+
+  const compByLoading = (loading) => {
+    console.log(loading)
+    switch (loading) {
+      case "NO FILE" :
+        return <Dropzone callback={fileHandler} />
+      case "UPLOADING FILE" :
+        return <div><p>{file ? file.path : ""}</p><p>UPLOADING FILE</p></div>
+      case "DOWNLOADING FILE" : 
+        return <div><p>{file ? file.path : ""}</p><p>DOWNLOADING FILE</p></div>
+      case "DOWNLOAD COMPLETE" : 
+        return <Player path="/temp.wav" />
+    }
   }
 
   const onChangeHandler = (e) => {
@@ -92,7 +107,7 @@ export default function Home() {
         </div>
       </section>
       <section>
-        <Dropzone callback={fileHandler} file={file} loading={loading} result={result}></Dropzone>
+        {compByLoading(loading)}
       </section>
       <section>
         <hr />

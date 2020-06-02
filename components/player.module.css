@@ -1,0 +1,15 @@
+.content {
+  border: darkgrey 1px solid;
+  height: 100%;
+}
+
+.play {
+  background: coral;
+  border: none;
+  padding: 20px;
+}
+
+.play:hover {
+  background-color: coral;
+  filter: brightness(85%); 
+}
