@@ -8,7 +8,6 @@ import { withCustomAudio } from 'react-soundplayer/addons';
 
 const AWSSoundPlayer = withCustomAudio(props => {
   const { trackTitle } = props;
- 
   return (
     <div>
       <Progress {...props} />
@@ -19,18 +18,17 @@ const AWSSoundPlayer = withCustomAudio(props => {
   );
 });
 
-export default function Player ({ path }) {
+export default function Player ({ path, trackTitle }) {
  
-  const trackTitle = '어깨는 꾸준히 단련해야 하는 법';
-
   return (
     <div className={utilStyles.container}>
-      <div className={styles.content}>
+      
+      {path != "" ? <div className={styles.content}>
         <AWSSoundPlayer
-          streamUrl={path}
+          streamUrl={`downloads/${path}`}
           trackTitle={trackTitle} 
           preloadType="auto" />
-      </div>
+      </div> : "loading"}
     </div>
   );
 };

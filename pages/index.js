@@ -10,9 +10,10 @@ export default function Home() {
   const [loading, setLoading] = useState("NO FILE")
   const [file, setFile] = useState(null)
   const [result, setResult] = useState("")
+  const [text, setText] = useState("")
   const fileRef = useRef()
   const audioRef = useRef()
-  const [speaker, setSpeaker] = useState(0)
+  const [speaker, setSpeaker] = useState("kss")
 
   const fetching = () => {
     
@@ -25,9 +26,10 @@ export default function Home() {
         method: 'POST',
         body: data
       }).then(response => response.json())
-      .then(({ result }) => {
+      .then(({ filename, text }) => {
         setLoading("DOWNLOADING FILE")
-        fetch(`/api/upload?filename=${result}`)
+        setText(text)
+        fetch(`/api/upload?filename=${filename}`)
         .then(response => response.json())
         .then(({filename})=> {
           setLoading("DOWNLOAD COMPLETE")
@@ -55,7 +57,6 @@ export default function Home() {
   }
 
   const compByLoading = (loading) => {
-    console.log(loading)
     switch (loading) {
       case "NO FILE" :
         return <Dropzone callback={fileHandler} />
@@ -64,7 +65,7 @@ export default function Home() {
       case "DOWNLOADING FILE" : 
         return <div><p>{file ? file.path : ""}</p><p>DOWNLOADING FILE</p></div>
       case "DOWNLOAD COMPLETE" : 
-        return <Player path="/temp.wav" />
+        return <Player path={result} trackTitle={text} />
     }
   }
 
@@ -82,10 +83,9 @@ export default function Home() {
   }
 
   useEffect(()=>{
-    console.log(file)
-    console.log(speaker)
-    // fetching()
-    tempFetching()
+    setResult("")
+    fetching()
+    // tempFetching()
   },[file, speaker])
 
   const siteTitle = "Mellotron STS website"
@@ -97,11 +97,11 @@ export default function Home() {
         <p>화자의 스타일을 입히기</p>
       </section>
       <section>
-        <div className={`${utilStyles.card} ${speaker == 0 ? utilStyles.active : utilStyles.nonactive}`} onClick={()=>setSpeaker(0)}>
+        <div className={`${utilStyles.card} ${speaker == "kss" ? utilStyles.active : utilStyles.nonactive}`} onClick={()=>setSpeaker("kss")}>
           <img src="/images/kss.svg" alt="audio Logo" width="50px" />
           <p>김양주</p>
         </div>
-        <div className={`${utilStyles.card} ${speaker == 1 ? utilStyles.active : utilStyles.nonactive}`} onClick={()=>setSpeaker(1)}>
+        <div className={`${utilStyles.card} ${speaker == "you" ? utilStyles.active : utilStyles.nonactive}`} onClick={()=>setSpeaker("you")}>
           <img src="/images/yu.svg" alt="audio Logo" width="50px" />
           <p>유희영</p>
         </div>
@@ -112,11 +112,7 @@ export default function Home() {
       <section>
         <hr />
       </section>
-     
 
-      <section>
-        <p>{loading}</p>
-      </section>
     </Layout>
   )
 }

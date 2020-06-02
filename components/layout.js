@@ -2,13 +2,14 @@ import Head from 'next/head'
 import Link from 'next/link'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
+import Router from "next/router"
 
 export default function Layout({ children, siteTitle }) {
   return (
     <>
       <nav className={styles.navbar}>
-        <Link href="/">
-          <div className={styles.brand}>
+        
+          <div className={styles.brand} onClick={()=>Router.reload()}>
             <img
               src="/images/verssae.png"
               className={`${styles.brandLogo}`}
@@ -16,7 +17,6 @@ export default function Layout({ children, siteTitle }) {
             />
             <span className={styles.brandName}>Voice Imitator</span>
           </div>
-        </Link>
         <ul className={styles.navitem}>
           <li>
             <Link href="#home"><a>소개</a></Link>
