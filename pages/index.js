@@ -2,8 +2,6 @@ import Layout from "../components/layout"
 import Dropzone from "../components/dropzone"
 import Player from "../components/player"
 import Progress from "../components/progress"
-
-import { useRouter } from "next/router"
 import { useState, useRef, useEffect } from "react"
 import utilStyles from '../styles/utils.module.css'
 
@@ -26,10 +24,8 @@ export default function Home() {
   }
 
   const download = async (name) => {
-    console.log(`download:${name}`)
     setLoading("DOWNLOADING FILE")
     const result = await fetch(`/api/upload?filename=${name}`)
-    console.log(result)
     const {filename} = await (result.json())
     setLoading("DOWNLOAD COMPLETE")
     console.log(filename)
@@ -42,7 +38,6 @@ export default function Home() {
       data.append('file', file)
       data.append('speaker', speaker)
       const {filename, text} = await upload(data)
-      console.log(filename)
       setText(text)
       await download(filename)
     }
@@ -63,7 +58,6 @@ const tempFetching = () => {
 
 
   const compByLoading = (loading) => {
-    console.log(file)
     switch (loading) {
       case "NO FILE" :
         return <Dropzone callback={fileHandler} />
@@ -74,15 +68,6 @@ const tempFetching = () => {
         return <Player path={result} trackTitle={text} />
     }
 
-}
-
-const onChangeHandler = (e) => {
-  e.preventDefault()
-  const file = fileRef.current.files[0]
-  const { current } = audioRef
-  if (current && file) {
-    current.src = URL.createObjectURL(file)
-  }
 }
 
 const fileHandler = (file) => {
@@ -115,9 +100,6 @@ return (
     </section>
     <section>
       {compByLoading(loading)}
-    </section>
-    <section>
-      <hr />
     </section>
 
   </Layout>

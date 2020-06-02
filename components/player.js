@@ -1,4 +1,3 @@
-import { useState, useRef, useEffect } from "react"
 import styles from "./player.module.css"
 import utilStyles from "../styles/utils.module.css"
 
