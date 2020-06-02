@@ -19,10 +19,10 @@ export default function Layout({ children, siteTitle }) {
           </div>
         <ul className={styles.navitem}>
           <li>
-            <Link href="#home"><a>소개</a></Link>
+            <Link href="/"><a>소개</a></Link>
           </li>
           <li>
-            <Link href="#home2"><a>데모</a></Link>
+            <Link href="/demo"><a>데모</a></Link>
           </li>
         </ul>
         <a href="https://github.com/Verssae/mello-next" target="_blank" className={styles.github}>
