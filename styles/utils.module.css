@@ -34,3 +34,20 @@
   padding: 75px 0;
 }
 
+.h3 {
+  padding-top: 30px;
+  font-family: 'NotoSansRegular';
+  margin: 0;
+  font-size: 15pt;
+}
+
+.narrow {
+  width: 60px;
+  margin: 5;
+}
+
+.name {
+  margin: 4px;
+  font-size: 9pt;
+  padding: 0;
+}
