@@ -9,7 +9,10 @@ export default function Dropzone({callback}) {
     callback(acceptedFiles[0])
   }, [])
 
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({
+    onDrop: onDrop,
+    accept: "audio/wav"
+  })
 
   return (
     <div className={`${utilStyles.container} ${styles.container}`}>

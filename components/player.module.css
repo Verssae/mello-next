@@ -2,3 +2,8 @@
   border: darkgrey 1px solid;
   height: 100%;
 }
+
+.text {
+  font-family: 'NotoSansThin';
+  font-size: 15pt;
+}

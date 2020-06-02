@@ -11,7 +11,7 @@ const AWSSoundPlayer = withCustomAudio(props => {
     <div>
       <Progress {...props} />
       <PlayButton {...props} />
-      <h2>{trackTitle}</h2>
+      <p className={styles.text}>{trackTitle}</p>
       <Timer {...props} />
     </div>
   );
