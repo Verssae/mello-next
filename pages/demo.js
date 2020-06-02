@@ -80,7 +80,7 @@ useEffect(() => {
   // tempFetching()
 }, [file, speaker])
 
-const siteTitle = "Mellotron STS website"
+const siteTitle = "Mellotron STS Demo"
 
 return (
   <Layout siteTitle={siteTitle}>
