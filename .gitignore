@@ -32,6 +32,9 @@ yarn-error.log*
 
 #custom
 /public/downloads/*
+!/public/downloads/temp.wav
+/public/uploads/*
+/public/uploads/temp.wav
 
 ### VisualStudioCode ###
 .vscode/*
