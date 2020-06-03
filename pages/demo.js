@@ -9,23 +9,45 @@ export default function Home() {
   const [loading, setLoading] = useState("NO FILE")
   const [file, setFile] = useState(null)
   const [result, setResult] = useState("")
-  const [text, setText] = useState("")
+  const [trans, setTrans] = useState("")
   const fileRef = useRef()
   const audioRef = useRef()
   const [speaker, setSpeaker] = useState("kss")
 
   const upload = async (data) => {
     setLoading("UPLOADING FILE")
-    const response = await fetch("http://27.96.130.116:16006/uploads", {
+    console.log("Call upload api")
+
+    // const res = await fetch("/api/upload", {
+    //   method: 'POST',
+    //   body: file,
+    //   headers: {
+    //     "Content-Type": "audio/wav",
+    //     "Speaker": speaker
+    //   }
+    // });
+    // console.log("Send done");
+
+    // console.log(json)
+
+    // const response = await fetch("http://27.96.130.116:16006/uploads", {
+    const response = await fetch("/api/upload", {
       method: 'POST',
       body: data
     })
-    return response.json()
+    return await (response.json())
+  }
+
+  const inference = async (filepath) => {
+    console.log("Init inference")
+    const result = await fetch(`/api/inference?filepath=${filepath}&speaker=${speaker}`)
+    console.log(result)
+    return await result.json()
   }
 
   const download = async (name) => {
     setLoading("DOWNLOADING FILE")
-    const result = await fetch(`/api/upload?filename=${name}`)
+    const result = await fetch(`/api/download?filename=${name}`)
     const {filename} = await (result.json())
     setLoading("DOWNLOAD COMPLETE")
     console.log(filename)
@@ -36,9 +58,11 @@ export default function Home() {
     let data = new FormData()
     if (file != null) {
       data.append('file', file)
-      data.append('speaker', speaker)
-      const {filename, text} = await upload(data)
-      setText(text)
+      const {filepath} = await upload(data)
+      console.log(filepath)
+      const {filename, text} = await inference(filepath)
+      console.log(filename, text)
+      setTrans(text)
       await download(filename)
     }
   }
@@ -65,7 +89,7 @@ const tempFetching = () => {
       case "DOWNLOADING FILE" : 
         return <Progress filename={file.name}/>
       case "DOWNLOAD COMPLETE" : 
-        return <Player path={result} trackTitle={text} />
+        return <Player path={result} trackTitle={trans} />
     }
 
 }
