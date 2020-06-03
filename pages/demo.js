@@ -2,7 +2,7 @@ import Layout from "../components/layout"
 import Dropzone from "../components/dropzone"
 import Player from "../components/player"
 import Progress from "../components/progress"
-import { useState, useRef, useEffect } from "react"
+import { useState, useEffect } from "react"
 import utilStyles from '../styles/utils.module.css'
 
 export default function Home() {
@@ -10,27 +10,11 @@ export default function Home() {
   const [file, setFile] = useState(null)
   const [result, setResult] = useState("")
   const [trans, setTrans] = useState("")
-  const fileRef = useRef()
-  const audioRef = useRef()
   const [speaker, setSpeaker] = useState("kss")
 
   const upload = async (data) => {
     setLoading("UPLOADING FILE")
     console.log("Call upload api")
-
-    // const res = await fetch("/api/upload", {
-    //   method: 'POST',
-    //   body: file,
-    //   headers: {
-    //     "Content-Type": "audio/wav",
-    //     "Speaker": speaker
-    //   }
-    // });
-    // console.log("Send done");
-
-    // console.log(json)
-
-    // const response = await fetch("http://27.96.130.116:16006/uploads", {
     const response = await fetch("/api/upload", {
       method: 'POST',
       body: data

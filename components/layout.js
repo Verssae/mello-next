@@ -22,7 +22,7 @@ export default function Layout({ children, siteTitle }) {
             <Link href="/"><a>소개</a></Link>
           </li>
           <li>
-            <Link href="/demo"><a>데모</a></Link>
+            <Link href="/demo"><a>서비스</a></Link>
           </li>
         </ul>
         <a href="https://github.com/Verssae/mello-next" target="_blank" className={styles.github}>
